@@ -1,0 +1,6 @@
+---
+- name: Deploy mariadb replication
+  hosts: databases
+  become: true
+  roles:
+      - mariadb-replication
