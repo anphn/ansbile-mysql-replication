@@ -29,7 +29,7 @@
   when: root_pwd_check.rc == 0
   tags: mariadb
 
-- name: Place mariadb config file
+- name: Copying /root/.my.cnf config
   template:
     src: root-my.cnf.j2
     dest: /root/.my.cnf

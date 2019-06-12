@@ -1,8 +1,12 @@
 [server]
 
+[mysqld]
+
 [embedded]
 
-[mysqld]
+[mariadb]
+
+[mariadb-10.1]
 ### replication ###
 gtid_domain_id=1
 server-id = {{ server_id }}
@@ -15,8 +19,8 @@ max_binlog_size=300M
 ## basic ###
 bind-address = {{ ansible_host }}
 user=mysql
-datadir=/data/lib/mysql
-log_error=/data/log/mysqld/mysql_error.log
+datadir=/var/lib/mysql
+log_error=/var/log/mysqld/mysql_error.log
 socket=/var/lib/mysql/mysql.sock
 port=3306
 default_storage_engine=InnoDB
@@ -91,6 +95,6 @@ innodb_log_file_size=512M
 
 
 [xtrabackup]
-datadir = /data/lib/mysql
-socket = /data/lib/mysql/mysql.sock
+datadir = /var/lib/mysql
+socket = /var/lib/mysql/mysql.sock
 streamfmt = xbstream

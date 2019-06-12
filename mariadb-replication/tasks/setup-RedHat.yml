@@ -1,6 +1,6 @@
 ---
 # tasks file for ansible-openstack-mariadb
-- name: Add galera repo
+- name: Add Mariadb repo
   yum_repository:
     name: "{{ galera_repo.name }}"
     description: "{{ galera_repo.description }}"
@@ -13,7 +13,7 @@
   retries: 5
   delay: 2
 
-- name: Install OpenStack mariadb packages
+- name: Install mariadb packages
   package:
     name: "{{ item }}"
     state: "latest"
@@ -49,6 +49,7 @@
     dest: "/etc/hosts"
   with_items: "{{ groups['databases'] }}"
   become: true
+
 - name: Creates directory
   file:
     path: /data/log/{{item}}
@@ -64,23 +65,25 @@
   until: create_directory is success
   retries: 5
   delay: 2
-- name: Creates directory
-  file:
-    path: /data/lib/mysql
-    state: directory
-    owner: mysql
-    group: mysql
-    mode: 0775
-  register: create_directory
-  until: create_directory is success
-  retries: 5
-  delay: 2
 
-- name: copy config mariadb
+# - name: Creates directory /data/lib/mysql
+#   file:
+#     path: /data/lib/mysql
+#     state: directory
+#     owner: mysql
+#     group: mysql
+#     mode: 0775
+#   register: create_directory
+#   until: create_directory is success
+#   retries: 5
+#   delay: 2
+
+- name: Copying config mariadb
   template:
     src: server.cnf.j2
     dest: /etc/my.cnf.d/server.cnf
   tags: test
+
 - name: Ensure mariabd started and enabled
   systemd:
     name: mariadb
