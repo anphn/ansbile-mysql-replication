@@ -4,9 +4,10 @@
   include: setup-RedHat.yml
   when: ansible_os_family == 'RedHat'
   tags: install
+
 # Configure MySQL.
 - name: Config MySQL
-  include: secure-installation.yml
+  include: config-mysql.yml
   tags: config
 
 - name: Config Replication

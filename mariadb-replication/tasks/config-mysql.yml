@@ -1,0 +1,5 @@
+---
+- name: Copying config mariadb
+  template:
+    src: server.cnf.j2
+    dest: /etc/my.cnf.d/server.cnf
