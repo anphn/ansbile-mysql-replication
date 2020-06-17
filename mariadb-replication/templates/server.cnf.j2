@@ -74,7 +74,7 @@ net_read_timeout=600
 net_write_timeout=600
 
 ### temporary tables ###
-tmp_table_size=128M
+tmp_table_size= {{ mysql_tmp_table_size }}
 max_heap_table_size=128M
 tmpdir=/data/log/mysqld/tmpdir
 ### slow query ###
