@@ -82,7 +82,7 @@
   template:
     src: server.cnf.j2
     dest: /etc/my.cnf.d/server.cnf
-    
+
 - name: Check if root password is set
   shell: >
     mysqladmin -u root status
@@ -92,7 +92,7 @@
 - name: Set MariaDB root password for the first time (root@localhost)
   mysql_user:
     name: root
-    password: "{{ mariadb_root_password }}"
+#    password: "{{ mariadb_root_password }}"
     host: localhost
     state: present
   when: root_pwd_check.rc == 0
@@ -114,7 +114,6 @@
   template:
     src: root-my.cnf.j2
     dest: /root/.my.cnf
-
 
 - name: Ensure mariabd started and enabled
   systemd:
