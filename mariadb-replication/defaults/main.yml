@@ -14,3 +14,4 @@ mysql_replication_user:
   name: replication
   password: secret 
 mariadb_root_password: 123456
+mariadb_socket: /var/lib/mysql/mysql.sock
